@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Production builds
+dist/
+frontend/dist/
+build/
+
+# Python & testing caches
+__pycache__/
+backend/**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.agents/
+
+# SQLite databases & runtime data
+*.sqlite
+*.sqlite3
+*.db
+backend/omnigenedb.sqlite
+omnigenedb.sqlite
+data/
+backend/data/runs/
+backend/data/*.sqlite
+
+# Large genomics/GEO data downloads
+*.soft.gz
+*.tsv.gz
+*.csv.gz
+*.tar
+*.fastq*
+*.bam
+GSE*/
+
+# Environment & credentials
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log

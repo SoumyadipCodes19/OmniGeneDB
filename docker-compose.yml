@@ -1,0 +1,55 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: omnigenedb-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+      - "8002:8000"
+    environment:
+      - PORT=8000
+      - DATABASE_URL=sqlite:////app/data/omnigenedb.sqlite
+      - DATA_DIR=/app/data/runs
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./backend/data/runs:/app/data/runs
+      - ./backend/omnigenedb.sqlite:/app/data/omnigenedb.sqlite
+    networks:
+      omnigenedb-net:
+        aliases:
+          - backend
+          - omnigenedb-backend
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/runs')\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ""
+    container_name: omnigenedb-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      - PORT=80
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      omnigenedb-net:
+        aliases:
+          - frontend
+          - omnigenedb-frontend
+
+networks:
+  omnigenedb-net:
+    driver: bridge

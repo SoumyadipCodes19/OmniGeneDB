@@ -1,0 +1,37 @@
+# Version control and agent metadata
+.git
+.gitignore
+.agents
+.gemini
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+venv/
+.venv/
+env/
+
+# Node & Frontend artifacts
+node_modules/
+dist/
+build/
+.npm/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*~
+
+# IDE configurations
+.idea/
+.vscode/
+
+# Large root-level test datasets not needed in build context
+GSE270454/
+*.soft.gz

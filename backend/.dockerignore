@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.git/
+.gitignore
+*.md
+*.log
+*.tmp
+.venv/
+env/
+venv/
+GSE15852_family.soft.gz
